@@ -74,8 +74,14 @@ public class Main {
         String username = scanner.nextLine();
         System.out.print("Enter your password: ");
         String password = scanner.nextLine();
-        User user = authService.logIn(username, password);
-        System.out.println("Welcome, " + user.getUsername() + "!");
+        AuthenticationService authentication = new AuthenticationService(users);
+        User user = authentication.logIn(username, password);
+        if (user == null) {
+            System.out.print("Login was unsuccessful!");
+        }
+        else {
+            System.out.println("Welcome, " + user.getUsername() + "!");
+        }
         // TODO Later: Add the to-do list operations
     }
 
@@ -88,8 +94,14 @@ public class Main {
         String username = scanner.nextLine();
         System.out.print("Enter your password: ");
         String password = scanner.nextLine();
-        User user = authService.signUp(username, password);
-        // TODO Later: Shows a message based on the result
+        AuthenticationService authentication = new AuthenticationService(users);
+        User user = authentication.signUp(username, password);
+        if (user == null) {
+            System.out.print("The username is already taken!");
+        }
+        else {
+            System.out.print("User <username> has been created successfully!");
+        }
     }
 
     /**
